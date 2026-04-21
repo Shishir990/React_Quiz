@@ -10,7 +10,7 @@ const initialState = {
   answer: null
 };
 
-/* Reducer (must be outside component) */
+
 function reducer(state, action) {
   switch (action.type) {
 
@@ -67,6 +67,7 @@ function reducer(state, action) {
         case "Reset":
       return {
         ...initialState,
+        Questions:state.Questions,
         status:"ready",
         
       };

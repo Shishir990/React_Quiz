@@ -9,7 +9,6 @@ export function Options({options,Question}){
                 options?.map(
                     (option,index)=>(
                            <div className="options">
-                             <span style={{fontWeight:"bold"}}>{index+1}</span>
                             <button disabled={isdisabled} className={`btn  ${ answer && Question.correctAnswer===index+1?"btn-correct":""} ${index+1===answer  &&  Question.correctAnswer!=index+1?"btn-selected":""}`}  onClick={()=>dispatch({type:"AnswerClicked",payload:index})} key={index}>{option}</button>
                            </div>                                                                                                                                           
                         
