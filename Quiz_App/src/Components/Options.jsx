@@ -5,12 +5,11 @@ export function Options({options,Question}){
     const isdisabled=answer!=null
     return(
         <div className="optionContainer">
-            {
+            { 
                 options?.map(
                     (option,index)=>(
                            <div className="options">
-                             <span style={{fontWeight:"bold"}}>{index+1}</span>
-                            <button disabled={isdisabled} className={`btn  ${ answer && Question.correctAnswer===index+1?"btn-correct":""} ${index+1===answer  &&  Question.correctAnswer!=index+1?"btn-selected":""}`}  onClick={()=>dispatch({type:"AnswerClicked",payload:index})} key={index}>{option}</button>
+                            <button disabled={isdisabled} className={`btn   ${index+1===answer?Question.correctAnswer===index+1?"btn-correct":"btn-selected":""}  ${isdisabled?Question.correctAnswer===index+1?"btn-correct":"":""}`} onClick={()=>dispatch({type:"AnswerClicked",payload:index})} key={index}>{option}</button>
                            </div>                                                                                                                                           
                         
                     )
