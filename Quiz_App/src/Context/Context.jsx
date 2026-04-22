@@ -7,7 +7,8 @@ const initialState = {
   status: "loading", // loading, ready, error, start, finished
   score: 0,
   index: 0,
-  answer: null
+  answer: null,
+  secondsRemaining:0
 };
 
 
@@ -30,7 +31,8 @@ function reducer(state, action) {
     case "Start":
       return {
         ...state,
-        status: "start"
+        status: "start",
+        secondsRemaining:action.payload*10
       };
 
     case "AnswerClicked": {
@@ -59,6 +61,14 @@ function reducer(state, action) {
         answer: null
       };
 
+      case "tick":{
+        return{
+          ...state,
+          secondsRemaining:state.secondsRemaining-1,
+          status:state.secondsRemaining===0?"finished":state.status
+        }
+      }
+
     case "Finish":
       return {
         ...state,
@@ -79,9 +89,9 @@ function reducer(state, action) {
 
 export function ContextProvider({ children }) {
 
-  const [{ Questions, status, score, index, answer }, dispatch] =
+  const [{ Questions, status, score, index, answer ,secondsRemaining}, dispatch] =
     useReducer(reducer, initialState);
-
+ const numQuestions = Questions?.length;
   async function fetchQues() {
     try {
       const res = await fetch(BASE_URL);
@@ -105,7 +115,7 @@ export function ContextProvider({ children }) {
     fetchQues();
   }, []);
 
-  const numQuestions = Questions?.length;
+ 
 console.log(Questions)
   return (
     <Context.Provider
@@ -116,6 +126,7 @@ console.log(Questions)
         answer,
         score,
         numQuestions,
+        secondsRemaining,
         dispatch
       }}
     >

@@ -5,7 +5,7 @@
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
   --accent: #aa3bff;
-  --accent-bg: rgba(56, 12, 216, 0.1);
+  --accent-bg: rgba(101, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
@@ -34,9 +34,9 @@
   :root {
     --text: #9ca3af;
     --text-h: #f3f4f6;
-    --bg: #1e202b;
+    --bg: #16171d;
     --border: #2e303a;
-    --code-bg: #12131a;
+    --code-bg: #1f2028;
     --accent: #c084fc;
     --accent-bg: rgba(192, 132, 252, 0.15);
     --accent-border: rgba(192, 132, 252, 0.5);
