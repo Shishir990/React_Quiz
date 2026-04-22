@@ -62,12 +62,13 @@ function reducer(state, action) {
     case "Finish":
       return {
         ...state,
-        status: "finished"
+        status: "finished"  
       };
         case "Reset":
       return {
         ...initialState,
         status:"ready",
+        Questions:state.Questions
         
       };
    
