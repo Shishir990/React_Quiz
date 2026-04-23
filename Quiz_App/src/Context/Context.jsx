@@ -8,6 +8,9 @@ const initialState = {
   score: 0,
   index: 0,
   answer: null,
+  questionsAttempted:0,
+  questionsCorrect:0,
+  highestScore:0,
   secondsRemaining:0
 };
 
@@ -44,12 +47,15 @@ function reducer(state, action) {
         return {
           ...state,
           score: state.score + currentQues.marks,
+          questionsAttempted:state.questionsAttempted+1,
+          questionsCorrect:state.questionsCorrect+1,
           answer: answer
         };
       }
 
       return {
         ...state,
+        questionsAttempted:state.questionsAttempted+1,
         answer: answer
       };
     }
@@ -70,15 +76,18 @@ function reducer(state, action) {
       }
 
     case "Finish":
+      
       return {
         ...state,
-        status: "finished"
+        status: "finished",
+         highestScore:state.score>state.highestScore?state.score:state.highestScore
       };
         case "Reset":
       return {
         ...initialState,
         Questions:state.Questions,
         status:"ready",
+        highestScore:state.highestScore
         
       };
    
@@ -89,7 +98,7 @@ function reducer(state, action) {
 
 export function ContextProvider({ children }) {
 
-  const [{ Questions, status, score, index, answer ,secondsRemaining}, dispatch] =
+  const [{ Questions, status, score, index, answer ,questionsAttempted,questionsCorrect, highestScore,secondsRemaining}, dispatch] =
     useReducer(reducer, initialState);
  const numQuestions = Questions?.length;
   async function fetchQues() {
@@ -115,8 +124,9 @@ export function ContextProvider({ children }) {
     fetchQues();
   }, []);
 
- 
+ const totalTime=numQuestions*10
 console.log(Questions)
+console.log(highestScore);
   return (
     <Context.Provider
       value={{
@@ -127,6 +137,10 @@ console.log(Questions)
         score,
         numQuestions,
         secondsRemaining,
+        questionsAttempted,
+        questionsCorrect,
+        totalTime,
+         highestScore,
         dispatch
       }}
     >
